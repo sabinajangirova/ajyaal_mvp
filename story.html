@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.cdnfonts.com/css/spicy-rice" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajyaal</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            background-color: #f2f1c6;
+        }
+
+        /* Container for the scenes */
+        .scene-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Individual scenes */
+        .scene {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .scene img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .scene audio {
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Character avatar */
+        .character {
+            position: fixed;
+            bottom: 10vh;
+            width: 30vw; /* Responsive width */
+            max-width: 30vw; /* Limit size for larger screens */
+            min-width: 100px; /* Ensure visibility on small screens */
+            transition: transform 0.5s ease, bottom 0.5s ease;
+            z-index: 10;
+        }
+
+        /* Initial position when page is at the top */
+        .character.initial {
+            bottom: 50vh; /* Move character higher when page is at the top */
+        }
+
+        /* Character position classes */
+        .character.left {
+            transform: translateX(5vw); /* Adjust for mobile */
+        }
+
+        .character.right {
+            transform: translateX(60vw); /* Adjust for mobile */
+        }
+
+        .logo {
+            width: 100%;
+            display: flex;
+            font-family: 'Spicy Rice', sans-serif;
+            font-size: 50px;
+            color: #a0c0a9;
+            text-decoration: none;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <a class="logo" href="index.html">Ajyaal</a>
+    </div>
+    <!-- Character avatar (ensure it is shown) -->
+    <img src="emirati_boy.png" alt="Character" id="characterAvatar" class="character initial left">
+
+    <!-- Scene Container -->
+    <div class="scene-container">
+        <!-- Scene 1 -->
+        <div class="scene">
+            <img src="scene1.webp" alt="Scene 1">
+            <audio controls>
+                <source src="scene1_audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    
+        <!-- Scene 2 -->
+        <div class="scene">
+            <img src="scene2.webp" alt="Scene 2">
+            <audio controls>
+                <source src="scene2_audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    
+        <!-- Scene 3 -->
+        <div class="scene">
+            <img src="scene3.webp" alt="Scene 3">
+            <audio controls>
+                <source src="scene3_audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    
+<script>
+    // Get the character selection from local storage
+    let character = localStorage.getItem("character") || "boy"; // Default to 'boy' if nothing is set
+
+    // Set the character image source
+    const characterAvatar = document.getElementById("characterAvatar");
+    const characterSrc = `./emirati_${character}.png`;
+    characterAvatar.src = characterSrc;
+    // Ensure the character image is displayed
+    characterAvatar.style.display = "block";
+
+    let currentScene = -1; // Track the current scene (-1 initially to force update on first scroll)
+    const scenes = document.querySelectorAll(".scene");
+
+    // Function to update character position based on scene
+    function updateCharacterPosition() {
+        if (window.scrollY === 0) {
+            // If page is at the top, set initial higher position
+            characterAvatar.classList.add("initial");
+        } else {
+            // Remove initial position once scrolled
+            characterAvatar.classList.remove("initial");
+        }
+
+        if (currentScene % 2 === 0) {
+            characterAvatar.classList.remove("right");
+            characterAvatar.classList.add("left");
+        } else {
+            characterAvatar.classList.remove("left");
+            characterAvatar.classList.add("right");
+        }
+    }
+
+    // Add an event listener for scroll events
+    window.addEventListener("scroll", () => {
+        scenes.forEach((scene, index) => {
+            const rect = scene.getBoundingClientRect();
+            // If the scene is mostly visible, update character position
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                if (currentScene !== index) { // Only change when scene changes
+                    currentScene = index;
+                    updateCharacterPosition();
+                }
+            }
+        });
+        updateCharacterPosition(); // Update character's initial position if at the top
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.cdnfonts.com/css/spicy-rice" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/dynapuff" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajyaal</title>
+    <style>
+        body {
+            background-color: #f2f1c6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            /* justify-content: center; */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .logo {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .content {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .button-card {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .button-card {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .button-card img {
+            width: 100px;
+            height: 100px;
+        }
+
+        form {
+            font-family: 'DynaPuff', sans-serif;
+            color: #588157;
+            font-weight: 900;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        font > button {
+            font-family: 'DynaPuff', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            color: #588157;
+            background-color: #d8e2dc;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .submit-btn {
+            width: 75%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #588157;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: "DynaPuff", sans-serif;
+        }
+
+        .logo {
+            width: 100%;
+            display: flex;
+            font-family: 'Spicy Rice', sans-serif;
+            font-size: 50px;
+            color: #a0c0a9;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .route {
+            font-family: 'DynaPuff', sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="logo">
+        <a class="logo" href="index.html">Ajyaal</a>
+    </div>
+    <div class="content">
+        <p class="route" style="color: #588157;">Subscribe to get early access!</p>
+        <form class="button-card" style="background-color: #d8e2dc; box-shadow: #588157 3px 3px;" action="mailto:.com" method="post" enctype="text/plain">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            
+            <input onclick="sendEmail()" type="submit" class="submit-btn" value="Send Email">
+          </form>
+    </div> 
+</div>
+
+<script>
+    function sendEmail() {
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+
+        // Encode the subject and body
+        const subject = encodeURIComponent('Ajyaal early access for ' + name);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\nI would like to get early access to Ajyaal!`);
+
+        // Open mail client with pre-filled subject and body
+        window.location.href = `mailto:ajyaal.stories@outlook.com?subject=${subject}&body=${body}`;
+    }
+</script>
+
+</body>
+</html>
